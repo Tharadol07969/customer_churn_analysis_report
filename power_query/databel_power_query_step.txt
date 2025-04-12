@@ -1,0 +1,7 @@
+let
+    Source = Csv.Document(File.Contents("D:\งาน\Datacamp\Learn\Power BI\4.Case Study Analyzing Customer Churn in Power BI\Datasets\Databel - Data.csv"),[Delimiter=",", Columns=29, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Customer ID", type text}, {"Churn Label", type text}, {"Account Length (in months)", Int64.Type}, {"Local Calls", Int64.Type}, {"Local Mins", type number}, {"Intl Calls", Int64.Type}, {"Intl Mins", type number}, {"Intl Active", type text}, {"Intl Plan", type text}, {"Extra International Charges", Int64.Type}, {"Customer Service Calls", Int64.Type}, {"Avg Monthly GB Download", Int64.Type}, {"Unlimited Data Plan", type text}, {"Extra Data Charges", Int64.Type}, {"State", type text}, {"Phone Number", type text}, {"Gender", type text}, {"Age", Int64.Type}, {"Under 30", type text}, {"Senior", type text}, {"Group", type text}, {"Number of Customers in Group", Int64.Type}, {"Device Protection & Online Backup", type text}, {"Contract Type", type text}, {"Payment Method", type text}, {"Monthly Charge", Int64.Type}, {"Total Charges", Int64.Type}, {"Churn Category", type text}, {"Churn Reason", type text}}),
+    #"Replaced Value" = Table.ReplaceValue(#"Changed Type",0,1,Replacer.ReplaceValue,{"Number of Customers in Group"})
+in
+    #"Replaced Value"
